@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, UserPlus, PiggyBank, TrendingUp, Gift } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const steps = [
   {
@@ -29,6 +30,8 @@ const steps = [
 ];
 
 export function HowItWorksSection() {
+  const { openSignup } = useAuth();
+
   return (
     <section id="como-funciona" className="py-24 relative overflow-hidden">
       {/* Background decoration */}
@@ -89,7 +92,7 @@ export function HowItWorksSection() {
 
         {/* CTA */}
         <div className="mt-16 text-center">
-          <Button variant="hero" size="xl">
+          <Button variant="hero" size="xl" onClick={openSignup}>
             Começar Agora - É Grátis
             <ArrowRight className="h-5 w-5" />
           </Button>

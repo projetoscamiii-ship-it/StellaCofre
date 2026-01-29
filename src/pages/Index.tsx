@@ -5,8 +5,12 @@ import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
+import { SignupModal } from "@/components/SignupModal";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 
-const Index = () => {
+function IndexContent() {
+  const { isSignupOpen, closeSignup } = useAuth();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -18,7 +22,16 @@ const Index = () => {
         <CTASection />
       </main>
       <Footer />
+      <SignupModal open={isSignupOpen} onOpenChange={closeSignup} />
     </div>
+  );
+}
+
+const Index = () => {
+  return (
+    <AuthProvider>
+      <IndexContent />
+    </AuthProvider>
   );
 };
 

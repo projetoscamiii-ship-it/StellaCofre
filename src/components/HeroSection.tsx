@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap, TrendingUp } from "lucide-react";
 import { SavingsBox } from "./SavingsBox";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function HeroSection() {
+  const { openSignup } = useAuth();
+
   return (
     <section className="relative min-h-screen overflow-hidden pt-24 pb-16">
       {/* Background decorations */}
@@ -36,7 +39,7 @@ export function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="mb-10 flex flex-wrap gap-4">
-              <Button variant="hero" size="lg">
+              <Button variant="hero" size="lg" onClick={openSignup}>
                 Criar Minha Conta
                 <ArrowRight className="h-5 w-5" />
               </Button>

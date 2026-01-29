@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function CTASection() {
+  const { openSignup } = useAuth();
+
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background */}
@@ -33,6 +36,7 @@ export function CTASection() {
         <Button 
           size="xl" 
           className="bg-white text-primary hover:bg-white/90 shadow-elevated hover:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.25)] hover:-translate-y-1"
+          onClick={openSignup}
         >
           Criar Minha Conta Grátis
           <ArrowRight className="h-5 w-5" />
