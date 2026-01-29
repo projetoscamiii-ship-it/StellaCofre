@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Header() {
+  const { openSignup } = useAuth();
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -33,7 +36,7 @@ export function Header() {
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
             Entrar
           </Button>
-          <Button variant="hero" size="sm">
+          <Button variant="hero" size="sm" onClick={openSignup}>
             Começar Agora
           </Button>
         </div>
