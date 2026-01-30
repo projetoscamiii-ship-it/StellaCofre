@@ -3,7 +3,7 @@ import { Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
 export function Header() {
-  const { openSignup } = useAuth();
+  const { openLogin, openWalletModal } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
@@ -33,10 +33,10 @@ export function Header() {
 
         {/* CTA Buttons */}
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+          <Button variant="ghost" size="sm" className="hidden sm:inline-flex" onClick={openLogin}>
             Entrar
           </Button>
-          <Button variant="hero" size="sm" onClick={openSignup}>
+          <Button variant="hero" size="sm" onClick={openWalletModal}>
             Começar Agora
           </Button>
         </div>

@@ -74,6 +74,7 @@ type SignupFormData = z.infer<typeof signupSchema>;
 interface SignupModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onSwitchToLogin?: () => void;
 }
 
 // Helper functions for formatting
@@ -104,7 +105,7 @@ const formatDate = (value: string) => {
     .replace(/(\d{2})(\d)/, "$1/$2");
 };
 
-export function SignupModal({ open, onOpenChange }: SignupModalProps) {
+export function SignupModal({ open, onOpenChange, onSwitchToLogin }: SignupModalProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
@@ -430,7 +431,7 @@ export function SignupModal({ open, onOpenChange }: SignupModalProps) {
             {/* Login link */}
             <p className="text-center text-sm text-muted-foreground pt-4">
               Já tem uma conta?{" "}
-              <button type="button" className="text-primary font-medium hover:underline">
+              <button type="button" onClick={onSwitchToLogin} className="text-primary font-medium hover:underline">
                 Fazer login
               </button>
             </p>
