@@ -37,7 +37,7 @@ export function Header() {
             Entrar
           </Button>
           <Button variant="hero" size="sm" onClick={openWalletModal}>
-            Começar Agora
+            Conectar Carteira
           </Button>
         </div>
       </div>

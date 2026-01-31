@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -48,6 +49,7 @@ export function LoginModal({
   onCreateAccount,
 }: LoginModalProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -67,6 +69,7 @@ export function LoginModal({
       });
       onOpenChange(false);
       form.reset();
+      navigate("/dashboard");
     } else {
       toast.error("Credenciais inválidas", {
         description: "Verifique seu e-mail e senha",
