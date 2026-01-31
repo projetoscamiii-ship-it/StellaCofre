@@ -5,8 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles, Plane, Shield, GraduationCap, Home, Gift, Wallet, Plus, ArrowLeft } from "lucide-react";
+import { Sparkles, Plane, Shield, GraduationCap, Home, Gift, Wallet, Plus, ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+
+interface EditingGoal {
+  id: string;
+  name: string;
+  targetAmount: string;
+}
 
 interface GoalCategory {
   id: string;
@@ -78,6 +84,8 @@ const Dashboard = () => {
   const [targetAmount, setTargetAmount] = useState("");
   const [goals, setGoals] = useState<Goal[]>([]);
   const [newCategoryName, setNewCategoryName] = useState("");
+  const [editingGoal, setEditingGoal] = useState<EditingGoal | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleCategoryClick = (category: GoalCategory) => {
     setSelectedCategory(category);
@@ -115,6 +123,38 @@ const Dashboard = () => {
     toast.success(`Categoria "${newCategoryName}" criada com sucesso!`);
     setIsNewCategoryModalOpen(false);
     setNewCategoryName("");
+  };
+
+  const handleEditGoal = (goal: Goal, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setEditingGoal({
+      id: goal.id,
+      name: goal.name,
+      targetAmount: goal.targetAmount.toString()
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateGoal = () => {
+    if (!editingGoal || !editingGoal.name || !editingGoal.targetAmount) {
+      toast.error("Preencha todos os campos");
+      return;
+    }
+
+    setGoals(goals.map(goal => 
+      goal.id === editingGoal.id 
+        ? { ...goal, name: editingGoal.name, targetAmount: parseFloat(editingGoal.targetAmount) }
+        : goal
+    ));
+    toast.success("Meta atualizada com sucesso!");
+    setIsEditModalOpen(false);
+    setEditingGoal(null);
+  };
+
+  const handleDeleteGoal = (goalId: string, goalName: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setGoals(goals.filter(goal => goal.id !== goalId));
+    toast.success(`Meta "${goalName}" excluída com sucesso!`);
   };
 
   return (
@@ -227,13 +267,31 @@ const Dashboard = () => {
                           />
                         </div>
                       </div>
-                      <div className="text-right flex-shrink-0">
+                      <div className="text-right flex-shrink-0 mr-2">
                         <div className="font-bold text-foreground">
                           R$ {goal.currentAmount.toLocaleString('pt-BR')}
                         </div>
                         <div className="text-sm text-muted-foreground">
                           de R$ {goal.targetAmount.toLocaleString('pt-BR')}
                         </div>
+                      </div>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-9 w-9 text-muted-foreground hover:text-primary"
+                          onClick={(e) => handleEditGoal(goal, e)}
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-9 w-9 text-muted-foreground hover:text-destructive"
+                          onClick={(e) => handleDeleteGoal(goal.id, goal.name, e)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -317,6 +375,49 @@ const Dashboard = () => {
             </Button>
             <Button variant="hero" onClick={handleCreateNewCategory}>
               Criar Categoria
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Goal Modal */}
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
+                <Pencil className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <span>Editar Meta</span>
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="editGoalName">Nome da Meta</Label>
+              <Input
+                id="editGoalName"
+                placeholder="Ex: Viagem para Paris"
+                value={editingGoal?.name || ""}
+                onChange={(e) => setEditingGoal(prev => prev ? { ...prev, name: e.target.value } : null)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="editTargetAmount">Valor da Meta (R$)</Label>
+              <Input
+                id="editTargetAmount"
+                type="number"
+                placeholder="Ex: 10000"
+                value={editingGoal?.targetAmount || ""}
+                onChange={(e) => setEditingGoal(prev => prev ? { ...prev, targetAmount: e.target.value } : null)}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>
+              Cancelar
+            </Button>
+            <Button variant="hero" onClick={handleUpdateGoal}>
+              Salvar
             </Button>
           </DialogFooter>
         </DialogContent>
