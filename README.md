@@ -1,73 +1,55 @@
-# Welcome to your Lovable project
+<img width="1573" height="651" alt="image" src="https://github.com/user-attachments/assets/0708bb9a-f221-4058-81e6-a7cdbf8de6d0" />
 
-## Project info
 
-**URL**: (https://stellar-cofre-goals.lovable.app/)
+🌌 StellarCofre
+##StellarCofre é uma plataforma financeira de próxima geração que combina gestão de metas (goals) com uma interface futurista de alta tecnologia. O projeto utiliza uma estética baseada em glassmorphism e elementos holográficos para transformar a experiência de economizar dinheiro em algo visualmente impactante.
 
-## How can I edit this code?
+ Sobre o Projeto
+##Diferente de gerenciadores financeiros comuns, o StellarCofre foi projetado com uma filosofia de "Cofre Digital". Ele permite que usuários organizem seus ativos e acompanhem o progresso de suas metas através de um dashboard que utiliza conceitos de design Sci-Fi e Neo-Brutalismo.
 
-There are several ways of editing your application.
+✨ Diferenciais e Funcionalidades
+##Gestão de Metas (Goals): Acompanhamento visual do progresso de economia.
 
-**Use Lovable**
+Interface Holográfica: Uso intenso de backdrop-filter, brilhos neon e profundidade 3D.
 
-Simply visit the [Lovable Project](https://stellar-cofre-goals.lovable.app/) and start prompting.
+Visualização de Dados: Gráficos interativos integrados para monitorar saldos e transações.
 
-Changes made via Lovable will be committed automatically to this repo.
+Design Responsivo: Experiência fluida tanto em desktop quanto em dispositivos móveis.
 
-**Use your preferred IDE**
+Tipografia Futurista: Implementação de fontes como Orbitron para títulos e Fira Code para dados técnicos.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🛠️ Stack Tecnológica
+Este projeto foi construído com as ferramentas mais modernas do ecossistema React:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Frontend: React 19 + Vite
 
-Follow these steps:
+Estilização: Tailwind CSS
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Componentes: Shadcn UI & Radix UI
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Animações: Framer Motion & Tailwind Animate
 
-# Step 3: Install the necessary dependencies.
-npm i
+Gráficos: Recharts
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Gerenciamento de Estado/Rotas: Wouter
 
-**Edit a file directly in GitHub**
+Validação: Zod & React Hook Form
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+📦 Como Instalar
+S#e você deseja rodar este projeto localmente:
 
-**Use GitHub Codespaces**
+Clone o repositório:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Bash
+git clone https://github.com/seu-usuario/stellar-cofre.git
+Instale as dependências:
 
-## What technologies are used for this project?
+Bash
+pnpm install
+Inicie o ambiente de desenvolvimento:
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://stellar-cofre-goals.lovable.app/) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
+Bash
+pnpm dev
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
